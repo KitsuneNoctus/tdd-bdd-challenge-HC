@@ -45,18 +45,21 @@ const getShoppingCart = () => {
 
 const addItemToCart = (item) => {
   // should add item to shopping cart
-  // if shoppingCart.includes(item){
-  //   shoppingCart.find(element => element > item).p
-  // }
+  if (shoppingCart.includes(item)){
+    const index = shoppingCart.indexOf(item);
+    shoppingCart[index].quantity += item.quantity
+    return
+  }
   return shoppingCart.push(item)
 }
 
 const getNumItemsInCart = () => {
   // should return the total quantity of items in cart
-  // const cartLength = 0
-  // return cartLength
-  // console.log(shoppingCart)
-  return shoppingCart.length
+  let total = 0
+  for(let i = 0; i < shoppingCart.length; i++){
+    total += shoppingCart[i].quantity
+  }
+  return total
 }
 
 const removeItemFromCart = (item) => {
@@ -67,10 +70,15 @@ const removeItemFromCart = (item) => {
 
 const totalCostOfCart = () => {
   // Should return total cost of all items in shopping cart
+  let totalCost = 0
+  for(let i = 0; i < shoppingCart.length; i++){
+    totalCost += shoppingCart[i].price * shoppingCart[i].quantity
+  }
+  return totalCost
 }
 
 module.exports = {
   sayHello, area, perimeter, circleArea,
   clearCart, createItem, getShoppingCart, addItemToCart,
-  getNumItemsInCart, removeItemFromCart
+  getNumItemsInCart, removeItemFromCart, totalCostOfCart
 }
