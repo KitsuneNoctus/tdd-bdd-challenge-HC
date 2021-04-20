@@ -96,15 +96,16 @@ it("Should add a new item to the shopping cart", function(){
 
 it("Should return the number of items in the cart", function(){
   const item = utils.createItem("apple", 0.99)
-  const item2 = utils.createItem("apple", 0.99)
   const item3 = utils.createItem("pear", 0.69)
   const _ = utils.addItemToCart(item)
-  const _1 = utils.addItemToCart(item2)
+  const _1 = utils.addItemToCart(item)
   const _2 = utils.addItemToCart(item3)
   const itemsNum = utils.getNumItemsInCart()
+  const items = utils.getShoppingCart()
+  console.log(items)
 
   expect(item).to.be.a("object")
-  expect(item2).to.be.a("object")
+  // expect(item2).to.be.a("object")
   expect(item3).to.be.a("object")
   expect(itemsNum).to.be.a("number")
   expect(itemsNum).to.equal(3)
@@ -112,21 +113,19 @@ it("Should return the number of items in the cart", function(){
 
 it("Should remove items from cart", function(){
   const item = utils.createItem("apple", 0.99)
-  const item2 = utils.createItem("apple", 0.99)
   const item3 = utils.createItem("pear", 0.69)
   const _ = utils.addItemToCart(item)
-  const _1 = utils.addItemToCart(item2)
+  const _1 = utils.addItemToCart(item)
   const _2 = utils.addItemToCart(item3)
   const items = utils.getShoppingCart()
   const itemsNum = utils.getNumItemsInCart()
+  console.log(items)
 
   expect(item).to.be.a("object")
-  expect(item2).to.be.a("object")
   expect(item3).to.be.a("object")
   expect(itemsNum).to.be.a("number")
 
   expect(items).to.contain(item)
-  expect(items).to.contain(item2)
   expect(items).to.contain(item3)
 
   expect(itemsNum).to.equal(3)
@@ -134,7 +133,7 @@ it("Should remove items from cart", function(){
   const remove = utils.removeItemFromCart(item)
   const itemsNum2 = utils.getNumItemsInCart()
   expect(itemsNum2).to.be.a("number")
-  expect(itemsNum2).to.equal(2)
+  expect(itemsNum2).to.equal(1)
 })
 
 // ========================================================
@@ -145,4 +144,26 @@ it("Should update the count of items in the cart")
 
 it("Should validate that an empty cart has 0 items")
 
-it("Should return the total cost of all items in the cart")
+it("Should return the total cost of all items in the cart", function(){
+  const item = utils.createItem("apple", 0.99)
+  const item3 = utils.createItem("pear", 0.69)
+  const _ = utils.addItemToCart(item)
+  const _1 = utils.addItemToCart(item)
+  const _2 = utils.addItemToCart(item3)
+  const items = utils.getShoppingCart()
+  const itemsNum = utils.getNumItemsInCart()
+  console.log(items)
+
+  expect(item).to.be.a("object")
+  expect(item3).to.be.a("object")
+  expect(itemsNum).to.be.a("number")
+
+  expect(items).to.contain(item)
+  expect(items).to.contain(item3)
+
+  expect(itemsNum).to.equal(3)
+
+  const totalCost = utils.totalCostOfCart()
+  expect(totalCost).to.be.a("number")
+  expect(totalCost).to.equal(2.67)
+})
